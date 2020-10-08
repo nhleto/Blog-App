@@ -1,3 +1,4 @@
+# resonsible for comments on blog posts
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
