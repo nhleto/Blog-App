@@ -1,4 +1,8 @@
 <h1><%= @article.title %></h1>
+
+<% if !@article.image.url.include?('missing') %>
+  <p><%= image_tag @article.image.url %></p>
+<% end %>
 <p><%= @article.body %></p>
 <p>
   Tags:
@@ -6,6 +10,8 @@
     <%= link_to tag.name, tag_path(tag) %>
   <% end %>
 </p>
+<% from_time = Time.now %>
+<p>Posted <%= distance_of_time_in_words(@article.created_at, from_time) %> ago</p>
 <%= render partial: 'comments/form' %>
 <%= link_to "<< Back to Articles List", articles_path %>
 <%= link_to "delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %>
